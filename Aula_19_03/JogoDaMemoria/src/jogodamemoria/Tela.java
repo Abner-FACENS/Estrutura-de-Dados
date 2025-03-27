@@ -1,8 +1,8 @@
 package jogodamemoria;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -11,9 +11,13 @@ public class Tela extends javax.swing.JFrame {
     int rodada = 0;
     int player;
     int pontuacao;
+    int dificuldade = 250;
     List<JButton> sequencia = new ArrayList<>();
     List<JButton> sequenciaPlayer = new ArrayList<>();
-    List <JButton> botao = new ArrayList<>();
+    List<JButton> botao = new ArrayList<>();
+    List<Object> pontos = new ArrayList<>();
+    boolean clique = false;
+    DefaultListModel listModel = new DefaultListModel();
 
     /**
      * Creates new form Tela
@@ -53,6 +57,7 @@ public class Tela extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        bto2.setEnabled(false);
         bto2.setPreferredSize(new java.awt.Dimension(50, 50));
         bto2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -60,6 +65,7 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        bto3.setEnabled(false);
         bto3.setPreferredSize(new java.awt.Dimension(50, 50));
         bto3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -67,6 +73,7 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        bto1.setEnabled(false);
         bto1.setPreferredSize(new java.awt.Dimension(50, 50));
         bto1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -74,6 +81,7 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        bto5.setEnabled(false);
         bto5.setPreferredSize(new java.awt.Dimension(50, 50));
         bto5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -81,6 +89,7 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        bto4.setEnabled(false);
         bto4.setPreferredSize(new java.awt.Dimension(50, 50));
         bto4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -88,6 +97,7 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        bto6.setEnabled(false);
         bto6.setPreferredSize(new java.awt.Dimension(50, 50));
         bto6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -95,6 +105,7 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        bto9.setEnabled(false);
         bto9.setPreferredSize(new java.awt.Dimension(50, 50));
         bto9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -102,6 +113,7 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        bto8.setEnabled(false);
         bto8.setPreferredSize(new java.awt.Dimension(50, 50));
         bto8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -109,6 +121,7 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
+        bto7.setEnabled(false);
         bto7.setPreferredSize(new java.awt.Dimension(50, 50));
         bto7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -133,12 +146,12 @@ public class Tela extends javax.swing.JFrame {
         jLabel4.setText("Nome do Jogo - Nome do Aluno - RA");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fácil", "Médio", "Díficil" }));
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Jogador: Pontuação" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
         });
+
         jScrollPane1.setViewportView(jList1);
 
         jTextField1.setText("Nome do Jogador");
@@ -239,66 +252,23 @@ public class Tela extends javax.swing.JFrame {
 
     private void bto1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bto1MouseClicked
 
-        // Prepara o array de botões
-        sequenciaPlayer.add(bto1);
-        botao.add(bto1);
-        
+        cliqueUsuario(bto1);
 
-        // Chama o método piscarBotoes com um callback para quando terminar
-        PintarBotoes.piscarBotoes(botao, 250, () -> {
 
-            if (sequencia.get(player) != sequenciaPlayer.get(player)) {
-                rodadaIniciada(false);
-                rodada = 0;
-                JOptionPane.showMessageDialog(rootPane, " Game Over ");
-                botao.clear();
-            }
-            else if (sequenciaPlayer.size() == sequencia.size()){
-                rodadaIniciada(false);
-                pontuacao += 1000;
-                jLabel2.setText("PONTUAÇÃO: " + pontuacao);
-                botao.clear();
-                
-            }
-            
-        });
-        botao.clear();
-        player++;
     }//GEN-LAST:event_bto1MouseClicked
 
     private void bto2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bto2MousePressed
 
-        // Prepara o array de botões
-        sequenciaPlayer.add(bto2);
-        botao.add(bto2);
+        cliqueUsuario(bto2);
 
-        // Chama o método piscarBotoes com um callback para quando terminar
-        PintarBotoes.piscarBotoes(botao, 250, () -> {
 
-            if (sequencia.get(player) != sequenciaPlayer.get(player)) {
-                rodadaIniciada(false);
-                rodada = 0;
-                JOptionPane.showMessageDialog(rootPane, " Game Over ");
-                botao.clear();
-            }
-            else if (sequenciaPlayer.size() == sequencia.size()){
-                rodadaIniciada(false);
-                pontuacao += 1000;
-                jLabel2.setText("PONTUAÇÃO: " + pontuacao);
-                botao.clear();
-                
-            }
-            
-        });
-        botao.clear();
-        player++;
     }//GEN-LAST:event_bto2MousePressed
 
     private void btoIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btoIniciarActionPerformed
 
         // Controla que a rodada está em execução
         rodadaIniciada(true);
-
+        
         rodada++;
         jLabel1.setText("RODADA: " + rodada);
         player = -1;
@@ -310,213 +280,137 @@ public class Tela extends javax.swing.JFrame {
         JButton[] Botoes = {bto1, bto2, bto3, bto4, bto5, bto6, bto7, bto8, bto9};
 
         sequencia = gerador.geraSequencia(rodada, Botoes);
-
+        clique = false;
         // Chama o método piscarBotoes com um callback para quando terminar
-        PintarBotoes.piscarBotoes(sequencia, 250, () -> {
-            // Esta parte será executada quando a animação terminar        
+        PintarBotoes.piscarBotoes(sequencia, dificuldade, () -> {
+            clique = true;
             JOptionPane.showMessageDialog(rootPane, "Agora é sua vez!");
         });
 
     }//GEN-LAST:event_btoIniciarActionPerformed
 
     private void bto3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bto3MouseClicked
-        // Prepara o array de botões
 
-        sequenciaPlayer.add(bto3);
-        botao.add(bto3);
+        cliqueUsuario(bto3);
 
-        // Chama o método piscarBotoes com um callback para quando terminar
-        PintarBotoes.piscarBotoes(botao, 250, () -> {
 
-            if (sequencia.get(player) != sequenciaPlayer.get(player)) {
-                rodadaIniciada(false);
-                rodada = 0;
-                JOptionPane.showMessageDialog(rootPane, " Game Over ");
-                botao.clear();
-            }
-            else if (sequenciaPlayer.size() == sequencia.size()){
-                rodadaIniciada(false);
-                pontuacao += 1000;
-                jLabel2.setText("PONTUAÇÃO: " + pontuacao);
-                botao.clear();
-                
-            }
-            
-        });
-        botao.clear();
-        player++;
     }//GEN-LAST:event_bto3MouseClicked
 
     private void bto4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bto4MouseClicked
-        // Prepara o array de botões
 
-        sequenciaPlayer.add(bto4);
-        botao.add(bto4);
+        cliqueUsuario(bto4);
 
-        // Chama o método piscarBotoes com um callback para quando terminar
-        PintarBotoes.piscarBotoes(sequenciaPlayer, 250, () -> {
-
-            if (sequencia.get(player) != sequenciaPlayer.get(player)) {
-                rodadaIniciada(false);
-                rodada = 0;
-                JOptionPane.showMessageDialog(rootPane, " Game Over ");
-                botao.clear();
-            }
-            else if (sequenciaPlayer.size() == sequencia.size()){
-                rodadaIniciada(false);
-                pontuacao += 1000;
-                jLabel2.setText("PONTUAÇÃO: " + pontuacao);
-                botao.clear();
-                
-            }
-            
-        });
-        botao.clear();
-        player++;
     }//GEN-LAST:event_bto4MouseClicked
 
     private void bto5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bto5MouseClicked
-        // Prepara o array de botões
 
-        sequenciaPlayer.add(bto5);
-        botao.add(bto5);
+        cliqueUsuario(bto5);
 
-        // Chama o método piscarBotoes com um callback para quando terminar
-        PintarBotoes.piscarBotoes(sequenciaPlayer, 250, () -> {
 
-            if (sequencia.get(player) != sequenciaPlayer.get(player)) {
-                rodadaIniciada(false);
-                rodada = 0;
-                JOptionPane.showMessageDialog(rootPane, " Game Over ");
-                botao.clear();
-            }
-            else if (sequenciaPlayer.size() == sequencia.size()){
-                rodadaIniciada(false);
-                pontuacao += 1000;
-                jLabel2.setText("PONTUAÇÃO: " + pontuacao);
-                botao.clear();
-                
-            }
-            
-        });
-        botao.clear();
-        player++;
     }//GEN-LAST:event_bto5MouseClicked
 
     private void bto7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bto7MouseClicked
-        // Prepara o array de botões
 
-        sequenciaPlayer.add(bto7);
-        botao.add(bto7);
+        cliqueUsuario(bto7);
 
-        // Chama o método piscarBotoes com um callback para quando terminar
-        PintarBotoes.piscarBotoes(sequenciaPlayer, 250, () -> {
 
-            if (sequencia.get(player) != sequenciaPlayer.get(player)) {
-                rodadaIniciada(false);
-                rodada = 0;
-                JOptionPane.showMessageDialog(rootPane, " Game Over ");
-                botao.clear();
-            }
-            else if (sequenciaPlayer.size() == sequencia.size()){
-                rodadaIniciada(false);
-                pontuacao += 1000;
-                jLabel2.setText("PONTUAÇÃO: " + pontuacao);
-                
-                
-            }
-        });
-        botao.clear();
-        player++;
     }//GEN-LAST:event_bto7MouseClicked
 
     private void bto8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bto8MouseClicked
-        // Prepara o array de botões
 
-        sequenciaPlayer.add(bto8);
-        botao.add(bto8);
+        cliqueUsuario(bto8);
 
-        // Chama o método piscarBotoes com um callback para quando terminar
-        PintarBotoes.piscarBotoes(sequenciaPlayer, 250, () -> {
 
-            if (sequencia.get(player) != sequenciaPlayer.get(player)) {
-                rodadaIniciada(false);
-                rodada = 0;
-                JOptionPane.showMessageDialog(rootPane, " Game Over ");
-                botao.clear();
-            }
-            else if (sequenciaPlayer.size() == sequencia.size()){
-                rodadaIniciada(false);
-                pontuacao += 1000;
-                jLabel2.setText("PONTUAÇÃO: " + pontuacao);
-                
-                
-            }
-        });
-        botao.clear();  
-        player++;
     }//GEN-LAST:event_bto8MouseClicked
 
     private void bto9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bto9MouseClicked
-        // Prepara o array de botões
 
-        sequenciaPlayer.add(bto9);
-        botao.add(bto9);
+        cliqueUsuario(bto9);
 
-        // Chama o método piscarBotoes com um callback para quando terminar
-        PintarBotoes.piscarBotoes(sequenciaPlayer, 250, () -> {
 
-            if (sequencia.get(player) != sequenciaPlayer.get(player)) {
-                rodadaIniciada(false);
-                rodada = 0;
-                JOptionPane.showMessageDialog(rootPane, " Game Over ");
-                botao.clear();
-            }
-            else if (sequenciaPlayer.size() == sequencia.size()){
-                rodadaIniciada(false);
-                pontuacao += 1000;
-                jLabel2.setText("PONTUAÇÃO: " + pontuacao);
-                botao.clear();
-                
-            }
-            
-        });
-        botao.clear();
-        player++;
     }//GEN-LAST:event_bto9MouseClicked
 
     private void bto6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bto6MouseClicked
         // Prepara o array de botões
 
-        sequenciaPlayer.add(bto6);
-        botao.add(bto6);
+        cliqueUsuario(bto6);
 
-        // Chama o método piscarBotoes com um callback para quando terminar
-        PintarBotoes.piscarBotoes(sequenciaPlayer, 250, () -> {
-
-            if (sequencia.get(player) != sequenciaPlayer.get(player)) {
-                rodadaIniciada(false);
-                rodada = 0;
-                JOptionPane.showMessageDialog(rootPane, " Game Over ");
-                botao.clear();
-            }
-            else if (sequenciaPlayer.size() == sequencia.size()){
-                rodadaIniciada(false);
-                pontuacao += 1000;
-                jLabel2.setText("PONTUAÇÃO: " + pontuacao);
-                botao.clear();
-                
-            }
-            botao.clear();
-        });
-        player++;
 
     }//GEN-LAST:event_bto6MouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+
+        switch (jComboBox1.getSelectedItem().toString()) {
+            case "Fácil":
+                dificuldade = 300;
+                break;
+            case "Médio":
+                dificuldade = 200;
+                break;
+            case "Díficil":
+                dificuldade = 100;
+                break;
+            default:
+                break;
+
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
     //Implemente o restante do código para controle de execução da rodada
     private void rodadaIniciada(boolean estado) {
         btoIniciar.setEnabled(!estado);
+        habilitarBotoes(estado);
 
+    }
 
+    public void cliqueUsuario(JButton btn) {
+
+        if (clique) {
+
+            sequenciaPlayer.add(btn);
+            botao.add(btn);
+
+            PintarBotoes.piscarBotoes(botao, 100, () -> {
+                clique = true;
+
+                if (sequencia.get(player) != sequenciaPlayer.get(player)) {
+                    rodadaIniciada(false);
+                    rodada = 0;
+                    JOptionPane.showMessageDialog(rootPane, " Game Over ");
+                    salvarLista();
+                    pontuacao = 0;
+
+                } else if (sequenciaPlayer.size() == sequencia.size()) {
+                    rodadaIniciada(false);
+                    pontuacao += 1000;
+                    jLabel2.setText("PONTUAÇÃO: " + pontuacao);
+                }
+                botao.clear();
+            });
+            player++;
+
+        }
+    }
+
+    public void habilitarBotoes(boolean estado) {
+        bto1.setEnabled(estado);
+        bto2.setEnabled(estado);
+        bto3.setEnabled(estado);
+        bto4.setEnabled(estado);
+        bto5.setEnabled(estado);
+        bto6.setEnabled(estado);
+        bto7.setEnabled(estado);
+        bto8.setEnabled(estado);
+        bto9.setEnabled(estado);
+    }
+
+    
+    
+
+    public void salvarLista() {
+        String pontos = jTextField1.getText() + ": " + pontuacao;
+        listModel.addElement(pontos);
+        jList1.setModel(listModel);
+        
     }
 
     /**
