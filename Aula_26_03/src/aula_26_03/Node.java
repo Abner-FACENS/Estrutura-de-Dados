@@ -1,14 +1,19 @@
 package aula_26_03;
 
-
 public class Node {
     
-    Object info;
+    String info;
     Node prox;
+    Node ant;
 
-    public Node(Object info, Node prox) {
+    public Node(String info, Node prox) {
         this.info = info;
         this.prox = prox;
+    }
+
+    @Override
+    public String toString() {
+        return "[ " + info + " ]";
     }
     
 
