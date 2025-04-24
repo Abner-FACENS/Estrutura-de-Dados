@@ -16,10 +16,13 @@ public class Main {
         tree.add(8);
         tree.add(7);
         tree.add(6);
-        tree.add(9);
+        tree.add(9); 
         
         
-        tree.imprimirEmOrdem(tree.root);
+        System.out.println("A profundidade do nó é: " + tree.procurarERetornar(6));
+        
+        
+
     }
     
 }
